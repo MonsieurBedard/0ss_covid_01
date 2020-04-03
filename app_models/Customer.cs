@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+// A comment
 namespace app_models
 {
     public class Customer : INotifyPropertyChanged
