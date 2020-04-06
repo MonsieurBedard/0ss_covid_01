@@ -1,4 +1,4 @@
-﻿<Window x:Class="Inventaire.MainWindow"
+﻿<Window x:Class="Inventaire.CustomersView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Inventaire"
         mc:Ignorable="d"
         Title="Gestion de clients" Width="800" Height="500"
-        MinHeight="500" MinWidth="640">
+        MinHeight="500" MinWidth="640"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <Menu>
@@ -15,7 +16,7 @@
                     <MenuItem Header="_Sauvegarder"/>
                     <MenuItem Header="_Fermer"/>
                     <Separator/>
-                    <MenuItem Header="_Nouveau client"/>
+                    <MenuItem Header="_Nouveau client" Click="CustomerNew_Click"/>
                     <Separator/>
                     <MenuItem Header="_Quitter"/>
                 </MenuItem>
@@ -31,6 +32,9 @@
                 </MenuItem>
             </Menu>
         </StackPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Nouveau client" Click="CustomerNew_Click"/>
+        </ToolBar>
         <StatusBar DockPanel.Dock="Bottom" Height="25">
             <TextBlock Text="Client sélectionné : " />
             <TextBlock Text="{Binding SelectedCustomer.Info}" />
@@ -47,7 +51,6 @@
                 </Grid.RowDefinitions>
                 <StackPanel Margin="6" Orientation="Horizontal" x:Name="spHeader">
                     <TextBlock Text="Liste des clients" />
-                    <Button Content="Nouveau client" Margin="6 0"/>
                 </StackPanel>
                 <ListView Grid.Row="1" ItemsSource="{Binding Customers}"
                           SelectedItem="{Binding SelectedCustomer}"
@@ -112,7 +115,7 @@
 
                 </StackPanel>
                 <StackPanel Grid.Row="6" Grid.Column="2" Margin="6">
-                    <Button Content="Supprimer client"/>
+                    <Button Content="Supprimer client" Click="CustomerDelete_Click"/>
                 </StackPanel>
                 <Image Margin="6" Grid.Row="7"
                        Source="{Binding SelectedCustomer.PicturePath}"
